@@ -5,3 +5,4 @@
 *.dat
 *.keras
 *.zip
+!LICENSE.txt
