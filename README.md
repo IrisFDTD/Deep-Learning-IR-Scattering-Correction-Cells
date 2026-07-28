@@ -26,8 +26,7 @@ The main goal of this notebook is to train artificial neural networks as surroga
 The process involves:
 + Loading Data: Importing `fdtd_simulations.mat`, that contains 11,000 absorbance and absorption spectra computed with the finite-difference time-domain (FDTD) method for ellipsoids with different shapes and refractive indices.
 + Data Processing: Simulation data is loaded, randomized, normalized, and split into training (80%) and validation (20%) sets.
-Neural Network Architecture: Consists of an input layer, four hidden dense layers with sigmoid activation and Batch Normalization, and a linear output layer.
-+ Model Definition: A feed-forward neural network model is implemented with Keras and TensorFlow. Each model takes a parameter vector $p=(r_x, r_y, r_z, k_m)$ as input, representing the semi-axes of an ellipsoid and a scaling factor for the imaginary refractive index. The output is a vector of 251 values, corresponding to the spectral wavelengths of the spectrum to be predicted (absorbance or true absorption). 
++ Model Definition: A feed-forward neural network model is implemented with Keras and TensorFlow. Consists of an input layer, four hidden dense layers with sigmoid activation and Batch Normalization, and a linear output layer. Each model takes a parameter vector $p=(r_x, r_y, r_z, k_m)$ as input, representing the semi-axes of an ellipsoid and a scaling factor for the imaginary refractive index. The output is a vector of 251 values, corresponding to the spectral wavelengths of the spectrum to be predicted (absorbance or true absorption). 
 + Training: Models are trained for 1000 epochs with a batch size of 64, using the RMSprop optimizer and the mean squared error (MSE) loss function. The best model is saved during training.
 + Evaluation: The performance of the predicted neural network is compared with the true values from the validation set, both for the entire set and for randomly selected individual spectra.
 + Run the notebook twice: first for absorption and then for absorbance. Two *.keras* files will be generated: surrogate_neural_network_model_absorbance.keras and surrogate_neural_network_model_absorption.keras
@@ -62,7 +61,7 @@ The notebook utilizes pre-trained neural network models (the *.keras* files gene
 +   An encoder-decoder model infers a physically plausible true absorption spectrum from target absorbance.
 
 It loads:
-+ File `fdtd_simulations.mat`, which contains 11,000 absorbance and absorption spectra computed with the finite-difference time-domain (FDTD) method for ellipsoids with different shapes and refractive indices.
++ File `fdtd_simulations.mat`, which contains 11,000 absorbance and absorption spectra computed with the FDTD method for ellipsoids with different shapes and refractive indices.
 + Several files with format `model_*fsp_spectra`, which contains the absorbance and absorption spectra of the three HeLa cells investigated in this work as computed with the FDTD method. The files are organized according to the simulated region (cell nucleus or entire cell) and the refractive index used in each simulation
 
 The workflow includes loading HeLa cell spectral data, preparing training datasets for the neural networks, loading the pre-trained models, and then performing an inverse design optimization. This optimization involves multiple runs of a gradient descent algorithm to find parameter sets that best match the target HeLa cell spectra. Finally, the results are sorted by cost, and the predicted parameters and spectra are visualized, including 2D projection maps of the optimized physical parameters.
