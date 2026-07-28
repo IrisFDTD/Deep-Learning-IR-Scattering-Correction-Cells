@@ -1,6 +1,6 @@
 # **Scattering correction for infrared spectra of biological cells using computational infrared microspectroscopy and deep learning**
 
-*Sergio G. Rodrigo $^{1,2*}$, Ilia L. Rasskazov $^{3}$, Luis Martin-Moreno $^{1,4}$, Martin Schnell5 $^{6,7*}$*
+*Sergio G. Rodrigo $^{1,2*}$, Ilia L. Rasskazov $^{3}$, Luis Martin-Moreno $^{1,4}$, Martin Schnell $^{5,6,7*}$*
 
 
 
@@ -21,27 +21,35 @@ $^*$ Corresponding authors. Email: sergut@unizar.es (SGR), schnelloptics@gmail.c
 ```bash
 fdtd_surrogate_neural_network_model.ipynb
 ```
- + Repeat this step twice: first for absorption and then for absorbance.
- + Two .keras files will be generated: surrogate_neural_network_model_absorbance.keras and surrogate_neural_network_model_absorption.keras
-
- This notebook implements and evaluates deep learning models for scattering correction in infrared spectra of biological cells. It uses artificial neural networks as surrogates for FDTD calculations to predict absorbance or absorption spectra.
+This notebook implements and evaluates deep learning models for scattering correction in infrared spectra of biological cells. It uses artificial neural networks as surrogates for FDTD calculations to predict absorbance or absorption spectra.
 
 Key points include:
 
-Objective: To develop deep learning models to correct scattering in infrared spectra, specifically for biological cells, acting as surrogates for FDTD simulations.
-Models: Two identical feed-forward neural network models, implemented with Keras and TensorFlow, are used.
-Model Input: Each model takes a parameter vector $p=(r_x, r_y, r_z, k_m)$$p=(r_x, r_y, r_z, k_m)$ as input, representing the semi-axes of an ellipsoid and a scaling factor for the imaginary refractive index.
-Model Output: A vector of 251 values, corresponding to the spectral wavelengths of the spectrum to be predicted (absorbance or true absorption).
-Data Processing: Simulation data is loaded, randomized, normalized, and split into training (80%) and validation (20%) sets.
++ Objective: To develop deep learning models to correct scattering in infrared spectra, specifically for biological cells, acting as surrogates for FDTD simulations.
++ Models: Two identical feed-forward neural network models, implemented with Keras and TensorFlow, are used.
++ Model Input: Each model takes a parameter vector $p=(r_x, r_y, r_z, k_m)$$p=(r_x, r_y, r_z, k_m)$ as input, representing the semi-axes of an ellipsoid and a scaling factor for the imaginary refractive index.
++ Model Output: A vector of 251 values, corresponding to the spectral wavelengths of the spectrum to be predicted (absorbance or true absorption). 
++ Data Processing: Simulation data is loaded, randomized, normalized, and split into training (80%) and validation (20%) sets.
 Neural Network Architecture: Consists of an input layer, four hidden dense layers with sigmoid activation and Batch Normalization, and a linear output layer.
-Training: Models are trained for 1000 epochs with a batch size of 64, using the RMSprop optimizer and the mean squared error (MSE) loss function. The best model is saved during training.
-Evaluation: The performance of the predicted neural network is compared with the true values from the validation set, both for the entire set and for randomly selected individual spectra.
++ Training: Models are trained for 1000 epochs with a batch size of 64, using the RMSprop optimizer and the mean squared error (MSE) loss function. The best model is saved during training.
++ Evaluation: The performance of the predicted neural network is compared with the true values from the validation set, both for the entire set and for randomly selected individual spectra.
++ Run the notebook twice: first for absorption and then for absorbance. Two *.keras* files will be generated: surrogate_neural_network_model_absorbance.keras and surrogate_neural_network_model_absorption.keras
+
 
 ### 2) Train the deep-learning model that predicts true absorption (heat dissipation) spectra, $\mathcal{A}_{true} (\nu)$, from absorbance spectra, $A(\nu)$.
 
 ```bash
 encoder_decoder_neural_network_model.ipynb
 ```
+
+The main goal is to predict true absorption (heat dissipation) spectra ($\mathcal{A}_{true} (\nu)$) from observed absorbance spectra ($A(\nu)$) using a neural network. 
+
+The process involves:
++ Loading Data: Importing `fdtd_simulations.mat` which contains absorbance and absorption spectra, along with wavelengths.
++ Data Preparation: Shuffling and splitting the data into 90% for training and 10% for validation.
++ Model Definition: Building a custom encoder-decoder model with specified neuron counts for each layer, including a latent space. It utilizes a fully connected encoder-decoder network architecture with three encoding and three decoding layers, designed to handle 251 spectral wavelengths.
++ Training: Compiling and fitting the model using the Adam optimizer and Mean Squared Error (MSE) as the loss function, over 1000 epochs, with early stopping and model checkpointing to save the best performing model.
++ Evaluation: Loading the trained model and comparing its predictions on the validation set against the true absorption values, both for the entire set (scatter plot) and for individual, randomly selected spectra.
 + One .keras file will be generated: encoder_decoder_network_model.keras
 
 ### 3) Inverse design optimization.
@@ -49,4 +57,11 @@ encoder_decoder_neural_network_model.ipynb
 ```bash
 inverse_design_optimization.ipynb
 ```
-+ The .keras files generated are loaded. 
+
+This notebook focuses on an inverse design process. It employs a gradient-descent algorithm to find optimal physical parameters (ellipsoid semi-axes and a material scaling factor) that minimize a defined objective function. This objective function compares predicted and target infrared spectra (absorbance and absorption).
+
+The notebook utilizes pre-trained neural network models (the .keras files generated):
++   Surrogate models for FDTD simulations predict absorbance and true absorption from the design parameters.
++   An encoder-decoder model infers a physically plausible true absorption spectrum from target absorbance.
+
+The workflow includes loading HeLa cell spectral data, preparing training datasets for the neural networks, loading the pre-trained models, and then performing an inverse design optimization. This optimization involves multiple runs of a gradient descent algorithm to find parameter sets that best match the target HeLa cell spectra. Finally, the results are sorted by cost, and the predicted parameters and spectra are visualized, including 2D projection maps of the optimized physical parameters.
