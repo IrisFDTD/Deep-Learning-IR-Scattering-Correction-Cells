@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "Scattering correction for infrared spectra of biological cells using computational infrared microspectroscopy and deep learning"
+abstract: "Software implementation for Scattering correction for infrared spectra of biological cells using computational infrared microspectroscopy and deep learning."
+version: 1.0.0
+date-released: 2026-12-11
+license: MIT
+repository-code: "https://github.com"
+keywords:
+  - symmetry detection 
+  - machine learning
+  - infrared microspectroscopy
+  - scattering correction
+authors:  
+  - family-names: "Rodrigo"
+    given-names: "Sergio G."
+    orcid: "https://orcid.org/0000-0001-6575-168X"
+    affiliation: "Departamento de Física Aplicada, Universidad de Zaragoza, Zaragoza, 50009, Spain; Instituto de Nanociencia y Materiales de Aragón (INMA), CSIC-Universidad de Zaragoza, Zaragoza, 50009, Spain"
+  - family-names: "L. Rasskazov"
+    given-names: "Ilia"
+    orcid: "https://orcid.org/0000-0002-7956-1702"
+    affiliation: "Independent Researcher, San Jose, California 95124, United States"    
+  - family-names: "Martín-Moreno"
+    given-names: "Luis"
+    orcid: "https://orcid.org/0000-0001-9273-8165"
+    affiliation: "Instituto de Nanociencia y Materiales de Aragón (INMA), CSIC-Universidad de Zaragoza, Zaragoza, 50009, Spain; Departamento de Física de la Materia Condensada, Universidad de Zaragoza, Zaragoza, 50009, Spain"
+  - family-names: "Schnell"
+    given-names: "Martin"
+    orcid: "https://orcid.org/0000-0003-3514-3127"
+    affiliation: "CIC nanoGUNE BRTA, 20018 Donostia-San Sebastián, Spain; Donostia International Physics Center, Donostia-San Sebastian 20018, Spain; IKERBASQUE, Basque Foundation for Science, 48013 Bilbao, Spain"
+  

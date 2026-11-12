@@ -1,0 +1,35 @@
+{
+  "upload_type": "software",
+  "title": "Scattering correction for infrared spectra of biological cells using computational infrared microspectroscopy and deep learning",
+  "description": "Software implementation for Scattering correction for infrared spectra of biological cells using computational infrared microspectroscopy and deep learning.",
+  "creators": [
+    {
+      "name": "Sergio G. Rodrigo",
+      "affiliation": "Departamento de Física Aplicada, Universidad de Zaragoza, Zaragoza, 50009, Spain; Instituto de Nanociencia y Materiales de Aragón (INMA), CSIC-Universidad de Zaragoza, Zaragoza, 50009, Spain",
+      "orcid": "0000-0001-6575-168X"
+    },
+    {
+      "name": "Ilia L. Rasskazov",
+      "affiliation": "Independent Researcher, San Jose, California 95124, United States",
+      "orcid": "0000-0002-7956-1702"
+    },
+    {
+      "name": "Luis Martín-Moreno",
+      "affiliation": "Instituto de Nanociencia y Materiales de Aragón (INMA), CSIC-Universidad de Zaragoza, Zaragoza, 50009, Spain; Departamento de Física de la Materia Condensada, Universidad de Zaragoza, Zaragoza, 50009, Spain",
+      "orcid": "0000-0001-9273-8165"
+    },
+    {
+      "name": "Martin Schnell",
+      "affiliation": "CIC nanoGUNE BRTA, 20018 Donostia-San Sebastián, Spain; Donostia International Physics Center, Donostia-San Sebastian 20018, Spain; IKERBASQUE, Basque Foundation for Science, 48013 Bilbao, Spain",
+      "orcid": "0000-0003-3514-3127"
+    }
+  ],
+  "keywords": [
+    "infrared microspectroscopy",
+    "machine learning",
+	"scattering correction"
+  ],
+  "version": "1.0.0",
+  "publication_date": "2026-12-11",
+  "license": "MIT"
+}
